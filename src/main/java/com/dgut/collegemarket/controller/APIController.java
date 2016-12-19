@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class APIController {
 
 
-	@RequestMapping(value = "/hello2", method=RequestMethod.GET)
-	public @ResponseBody String hello2(){
-		return "HELLO  CollegeMarket2!";
+	@RequestMapping(value = "/hello", method=RequestMethod.GET)
+	public @ResponseBody String hello(){
+		return "HELLO  CollegeMarket!";
 	}
 	
 	

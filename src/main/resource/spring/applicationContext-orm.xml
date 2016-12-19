@@ -18,10 +18,10 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 	<!-- 1.配置数据源 3种方式： -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<!-- 数据连接信息 -->
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/MemberCenter"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://172.27.0.23:3306/collegemarket"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="user" value="MemberCenter"></property>
-		<property name="password" value=""></property>
+		<property name="user" value="collegemarket"></property>
+		<property name="password" value="1234"></property>
 
 		<property name="minPoolSize" value="5" />
 		<property name="maxPoolSize" value="30" />
@@ -39,7 +39,7 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
-		<property name="packagesToScan" value="com.cloudage.membercenter.entity" />
+		<property name="packagesToScan" value="com.dgut.collegemarket.entity" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
@@ -66,7 +66,7 @@ http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- Jpa 注解扫描以及 Jpa transactionManager 及 Jpa entityManagerFactory的依赖 base-package目录下带 
 		@Repository的实体 -->
-	<jpa:repositories base-package="com.cloudage.membercenter"
+	<jpa:repositories base-package="com.dgut.collegemarket"
 		transaction-manager-ref="transactionManager"
 		entity-manager-factory-ref="entityManagerFactory" />
 

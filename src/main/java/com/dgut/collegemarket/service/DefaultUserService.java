@@ -1,36 +1,39 @@
-package com.cloudage.membercenter.service;
+package com.dgut.collegemarket.service;
 
-import java.util.List;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cloudage.membercenter.entity.Admin;
-import com.cloudage.membercenter.repository.IAdminRepository;
+import com.dgut.collegemarket.entity.User;
+import com.dgut.collegemarket.repository.IUserRepository;
 
 @Component
 @Service
 @Transactional
-public class DefaultAdminService implements IAdminService {
+public class DefaultUserService implements IUserService {
 
 	@Autowired
-	IAdminRepository adminRepo;
+	IUserRepository userRepo;
 	
 	@Override
-	public Admin create(String account, String passwordHash) {
-		// TODO Auto-generated method stub
-		return null;
+	public User create(String account, String passwordHash) {
+		User user = new User();
+		user.setAccount(account);
+		user.setPasswordHash(passwordHash);
+		return userRepo.save(user);
 	}
 
 	@Override
 	public void login(String account, String passwordHash) {
-		// TODO Auto-generated method stub
+		
+
 	}
 
 	@Override
-	public Admin getCurrentAdmin() {
+	public User getCurrentUser() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -44,12 +47,7 @@ public class DefaultAdminService implements IAdminService {
 	@Override
 	public void logout() {
 		// TODO Auto-generated method stub
-	}
 
-	@Override
-	public List<Admin> list() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

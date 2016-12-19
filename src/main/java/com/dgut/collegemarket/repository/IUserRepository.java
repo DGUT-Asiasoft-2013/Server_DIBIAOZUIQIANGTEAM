@@ -1,8 +1,8 @@
-package com.cloudage.membercenter.repository;
+package com.dgut.collegemarket.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.cloudage.membercenter.entity.User;
+import com.dgut.collegemarket.entity.User;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 

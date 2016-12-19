@@ -1,16 +1,19 @@
-package com.cloudage.membercenter.entity;
+package com.dgut.collegemarket.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.cloudage.membercenter.util.BaseEntity;
+import com.dgut.collegemarket.util.DateRecord;
 
 @Entity
-public class User extends BaseEntity{
+public class User extends DateRecord{
 	String account;
 	String passwordHash;
-	String name;
-	String avatar;
+	String name;//昵称
+	String avatar;//头像
+	int xp;//经验值
+	double coin;//金币
+	
 
 	@Column(unique=true)
 	public String getAccount() {
@@ -38,4 +41,18 @@ public class User extends BaseEntity{
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+	public int getXp() {
+		return xp;
+	}
+	public void setXp(int xp) {
+		this.xp = xp;
+	}
+	public double getCoin() {
+		return coin;
+	}
+	public void setCoin(double coin) {
+		this.coin = coin;
+	}
+	
+	
 }

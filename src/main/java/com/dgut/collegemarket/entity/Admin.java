@@ -1,12 +1,12 @@
-package com.cloudage.membercenter.entity;
+package com.dgut.collegemarket.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.cloudage.membercenter.util.BaseEntity;
+import com.dgut.collegemarket.util.DateRecord;
 
 @Entity
-public class Admin extends BaseEntity {
+public class Admin extends DateRecord {
 	String account;
 	String passwordHash;
 	

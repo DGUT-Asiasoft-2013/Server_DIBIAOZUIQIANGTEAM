@@ -1,4 +1,4 @@
-package com.cloudage.membercenter.util;
+package com.dgut.collegemarket.util;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

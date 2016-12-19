@@ -1,6 +1,6 @@
-package com.cloudage.membercenter.service;
+package com.dgut.collegemarket.service;
 
-import com.cloudage.membercenter.entity.User;
+import com.dgut.collegemarket.entity.User;
 
 public interface IUserService {
 	User create(String account, String passwordHash);

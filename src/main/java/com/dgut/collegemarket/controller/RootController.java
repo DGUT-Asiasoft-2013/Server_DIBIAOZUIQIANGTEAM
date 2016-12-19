@@ -1,4 +1,4 @@
-package com.cloudage.membercenter.controller;
+package com.dgut.collegemarket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cloudage.membercenter.service.IAdminService;
+import com.dgut.collegemarket.service.IAdminService;
 
 @Controller
 @RequestMapping("/")

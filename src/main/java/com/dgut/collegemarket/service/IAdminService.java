@@ -1,8 +1,8 @@
-package com.cloudage.membercenter.service;
+package com.dgut.collegemarket.service;
 
 import java.util.List;
 
-import com.cloudage.membercenter.entity.Admin;
+import com.dgut.collegemarket.entity.Admin;
 
 public interface IAdminService {
 	Admin create(String account, String passwordHash);

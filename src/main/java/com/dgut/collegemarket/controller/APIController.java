@@ -14,4 +14,14 @@ public class APIController {
 		return "HELLO  CollegeMarket!";
 	}
 
+	@RequestMapping(value = "/hello2", method=RequestMethod.GET)
+	public @ResponseBody String hello2(){
+		return "HELLO  CollegeMarket2!";
+	}
+	
+	
+	
+	
+	
+	
 }

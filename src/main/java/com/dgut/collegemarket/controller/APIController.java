@@ -72,7 +72,7 @@ public class APIController {
 			try{
 				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
 				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,account+".png"));
-				user.setAvatar("upload/user"+account+".png");
+				user.setAvatar("upload/user/"+account+".png");
 			}catch (Exception e) {
 				e.printStackTrace();
 			}

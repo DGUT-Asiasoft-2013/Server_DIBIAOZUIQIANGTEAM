@@ -19,14 +19,6 @@ public class DefaultUserService implements IUserService {
 	IUserRepository userRepo;
 	
 	@Override
-	public User create(String account, String passwordHash) {
-		User user = new User();
-		user.setAccount(account);
-		user.setPasswordHash(passwordHash);
-		return userRepo.save(user);
-	}
-
-	@Override
 	public void login(String account, String passwordHash) {
 		
 
@@ -48,6 +40,21 @@ public class DefaultUserService implements IUserService {
 	public void logout() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public User save(User user) {
+		return userRepo.save(user);
+	}
+
+	@Override
+	public User findById(Integer id) {
+		return userRepo.findOne(id);
+	}
+
+	@Override
+	public User findByAccount(String account) {
+		return userRepo.findUserByAccount(account);
 	}
 
 }

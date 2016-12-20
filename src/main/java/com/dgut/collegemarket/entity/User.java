@@ -11,8 +11,10 @@ public class User extends DateRecord{
 	String passwordHash;
 	String name;//昵称
 	String avatar;//头像
+	String email;//邮箱地址
 	int xp;//经验值
 	double coin;//金币
+	
 	
 
 	@Column(unique=true)
@@ -52,6 +54,12 @@ public class User extends DateRecord{
 	}
 	public void setCoin(double coin) {
 		this.coin = coin;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

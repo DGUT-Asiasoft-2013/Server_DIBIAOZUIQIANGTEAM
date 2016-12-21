@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import com.dgut.collegemarket.util.DateRecord;
 
 @Entity
+
 public class User extends DateRecord{
 	String account;
 	String passwordHash;

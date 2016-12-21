@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
+import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
 
@@ -24,6 +28,9 @@ public class APIController {
 
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	IRecordsService recordsService;
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
 	public @ResponseBody String hello(){
@@ -95,4 +102,28 @@ public class APIController {
 			return null;
 		}
 	}
+	
+	//增加一条金币使用记录
+	public Records addRecords(User user,String cause){
+		
+		Records records=new Records();
+		records.setCause(cause);
+		records.setUser(user);
+	
+		
+		return recordsService.save(records);
+	
+	}
+	@RequestMapping("/records/{page}")
+	public Page<Records> getRecordsByUserId(@PathVariable int page,HttpServletRequest request) {
+		
+		return recordsService.getRecordsByUserId(getCurrentUser(request),page);
+	}
+
+	@RequestMapping("/records")
+	public Page<Records> getRecordsByUserId(HttpServletRequest request) {
+		return recordsService.getRecordsByUserId(getCurrentUser(request),0);
+	}
+	
+	
 }

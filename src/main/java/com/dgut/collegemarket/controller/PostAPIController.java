@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dgut.collegemarket.entity.Post;
 import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IRecordsService;
@@ -37,7 +38,7 @@ public class PostAPIController {
 	
 	/**
 	 * 找到当前用户
-	 * @param request
+	 * @param requestPost
 	 * @return user
 	 */
 	@RequestMapping(value="/me", method=RequestMethod.GET)
@@ -47,6 +48,14 @@ public class PostAPIController {
 		return userService.findById(uid);
 	}
 		
-	
+	/**
+	 * 修改头像
+	 * @return user
+	 */
+	@RequestMapping(value="/addpost", method=RequestMethod.POST)
+	public Post AddPost(HttpServletRequest request){
+		Post post = new Post();
+		return post;
+	}
 	
 }

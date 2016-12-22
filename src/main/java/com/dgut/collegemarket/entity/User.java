@@ -14,7 +14,7 @@ public class User extends DateRecord{
 	String avatar;//头像
 	String email;//邮箱地址
 	int xp;//经验值
-	double coin;//金币
+	double coin;//余额
 	
 	
 

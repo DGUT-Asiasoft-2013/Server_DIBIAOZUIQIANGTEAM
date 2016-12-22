@@ -24,7 +24,7 @@ import com.dgut.collegemarket.service.IUserService;
 
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/post")
 public class PostAPIController {
 
 	@Autowired

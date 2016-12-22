@@ -22,6 +22,7 @@ import com.dgut.collegemarket.repository.IPostRepository;
 @Transactional
 public class DefaultPostService implements IPostService {
 
+
 //	@Autowired
 //	IPostRepository iPostResp;
 //
@@ -38,4 +39,5 @@ public class DefaultPostService implements IPostService {
 //	}
 	
 	
+
 }

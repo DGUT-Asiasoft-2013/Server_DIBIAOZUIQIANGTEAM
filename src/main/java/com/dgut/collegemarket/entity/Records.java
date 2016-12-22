@@ -1,5 +1,7 @@
 package com.dgut.collegemarket.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
@@ -11,7 +13,6 @@ public class Records extends DateRecord{
 	double coin;//金币数量
 	User user;//用户
 	String cause;//金额改变原因描述
-	
 	
 	public double getCoin() {
 		return coin;

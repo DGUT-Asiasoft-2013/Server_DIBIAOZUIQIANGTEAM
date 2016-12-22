@@ -38,7 +38,7 @@ public class PostAPIController {
 	
 	/**
 	 * 找到当前用户
-	 * @param request
+	 * @param requestPost
 	 * @return user
 	 */
 	@RequestMapping(value="/me", method=RequestMethod.GET)
@@ -77,5 +77,14 @@ public class PostAPIController {
 		return post;
 	}
 	
+	/* 修改头像
+	 * @return user
+	 */
+	@RequestMapping(value="/addpost", method=RequestMethod.POST)
+	public Post AddPost(HttpServletRequest request){
+		Post post = new Post();
+		post.setContent("1");
+		return post;
+	}
 	
 }

@@ -11,7 +11,6 @@ public class Post extends DateRecord{
 	String title;//标题
 	String content;//内容
 	String albums;//帖子图集
-	int quantity;//商品数量
 	double reward;//报酬
 	boolean issolve;//是否解决
 	
@@ -40,12 +39,6 @@ public class Post extends DateRecord{
 	}
 	public void setAlbums(String albums) {
 		this.albums = albums;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	public double getReward() {
 		return reward;

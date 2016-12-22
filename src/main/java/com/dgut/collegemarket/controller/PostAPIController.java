@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dgut.collegemarket.entity.Post;
 import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IRecordsService;
@@ -29,8 +30,6 @@ public class PostAPIController {
 	@Autowired
 	IUserService userService;
 	
-	@Autowired
-	IRecordsService recordsService;
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
 	public @ResponseBody String hello(){
@@ -49,26 +48,34 @@ public class PostAPIController {
 		return userService.findById(uid);
 	}
 		
-	/**
-	 * 用户上传头像
-	 * @param avatar
-	 * @param request
-	 * @return	user
-	 */
-	@RequestMapping(value="/update/avatar", method=RequestMethod.POST)
-	public void UpdateAvatar(
-			MultipartFile avatar,
-			HttpServletRequest request){
-		if(avatar!=null){
-			try{
-				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
-				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,getCurrentUser(request).getId() + ".png"));
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
+//	/**
+//	 * 发布帖子
+//	 * @return
+//	 */
+//	@RequestMapping(value="/addpost", method=RequestMethod.POST)
+//	public Post addPost(
+//			@RequestParam String title,
+//			@RequestParam String content,
+//			@RequestParam double reward,
+//			MultipartFile albums,
+//			HttpServletRequest request){
+//		Post post = new Post();
+//		post.setPublishers(getCurrentUser(request));
+//		post.setTitle(title);
+//		post.setContent(content);
+//		post.setReward(reward);
+//		post.setIssolve(false);
+//		if(albums!=null){
+//			try{
+//				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/post");
+//				FileUtils.copyInputStreamToFile(albums.getInputStream(), new File(realPath,post.getId()+".png"));
+//				post.setAlbums("upload/post/"+post.getId()+".png");
+//			}catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return post;
+//	}
+//	
 	
 }

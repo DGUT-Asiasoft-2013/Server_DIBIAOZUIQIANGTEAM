@@ -55,6 +55,7 @@ public class PostAPIController {
 	@RequestMapping(value="/addpost", method=RequestMethod.POST)
 	public Post AddPost(HttpServletRequest request){
 		Post post = new Post();
+		post.setContent("1");
 		return post;
 	}
 	

@@ -48,34 +48,34 @@ public class PostAPIController {
 		return userService.findById(uid);
 	}
 		
-//	/**
-//	 * 发布帖子
-//	 * @return
-//	 */
-//	@RequestMapping(value="/addpost", method=RequestMethod.POST)
-//	public Post addPost(
-//			@RequestParam String title,
-//			@RequestParam String content,
-//			@RequestParam double reward,
-//			MultipartFile albums,
-//			HttpServletRequest request){
-//		Post post = new Post();
-//		post.setPublishers(getCurrentUser(request));
-//		post.setTitle(title);
-//		post.setContent(content);
-//		post.setReward(reward);
-//		post.setIssolve(false);
-//		if(albums!=null){
-//			try{
-//				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/post");
-//				FileUtils.copyInputStreamToFile(albums.getInputStream(), new File(realPath,post.getId()+".png"));
-//				post.setAlbums("upload/post/"+post.getId()+".png");
-//			}catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		return post;
-//	}
-//	
+	/**
+	 * 发布帖子
+	 * @return
+	 */
+	@RequestMapping(value="/addpost", method=RequestMethod.POST)
+	public Post addPost(
+			@RequestParam String title,
+			@RequestParam String content,
+			@RequestParam double reward,
+			MultipartFile albums,
+			HttpServletRequest request){
+		Post post = new Post();
+		post.setPublishers(getCurrentUser(request));
+		post.setTitle(title);
+		post.setContent(content);
+		post.setReward(reward);
+		post.setIssolve(false);
+		if(albums!=null){
+			try{
+				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/post");
+				FileUtils.copyInputStreamToFile(albums.getInputStream(), new File(realPath,post.getId()+".png"));
+				post.setAlbums("upload/post/"+post.getId()+".png");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return post;
+	}
+	
 	
 }

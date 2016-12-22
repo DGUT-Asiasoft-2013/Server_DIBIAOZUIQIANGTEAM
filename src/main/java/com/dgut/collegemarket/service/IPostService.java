@@ -9,6 +9,7 @@ import com.dgut.collegemarket.entity.User;
 
 
 public interface IPostService {
-
+	public Page<Post> findPost(Integer page, Pageable pageable);
+	public Post save(Post post);
 	
 }

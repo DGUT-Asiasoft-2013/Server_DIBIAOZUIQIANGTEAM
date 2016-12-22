@@ -23,20 +23,20 @@ import com.dgut.collegemarket.repository.IPostRepository;
 public class DefaultPostService implements IPostService {
 
 
-//	@Autowired
-//	IPostRepository iPostResp;
-//
-//	@Override
-//	public Page<Post> findPost(Integer page, Pageable pageable) {
-//		Sort sort = new Sort(Direction.DESC,"createDate");
-//		PageRequest pageRequest = new PageRequest(page, 10, sort);
-//		return iPostResp.findAll(pageRequest);
-//	}
-//
-//	@Override
-//	public Post save(Post post) {
-//		return iPostResp.save(post);
-//	}
+	@Autowired
+	IPostRepository iPostResp;
+
+	@Override
+	public Page<Post> findPost(Integer page, Pageable pageable) {
+		Sort sort = new Sort(Direction.DESC,"createDate");
+		PageRequest pageRequest = new PageRequest(page, 10, sort);
+		return iPostResp.findAll(pageRequest);
+	}
+
+	@Override
+	public Post save(Post post) {
+		return iPostResp.save(post);
+	}
 	
 	
 

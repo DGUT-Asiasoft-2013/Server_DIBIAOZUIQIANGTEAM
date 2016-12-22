@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dgut.collegemarket.entity.Post;
 import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
+import com.dgut.collegemarket.repository.IPostRepository;
 import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
@@ -29,6 +30,9 @@ public class PostAPIController {
 
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	IPostRepository postService;
 	
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
@@ -74,18 +78,8 @@ public class PostAPIController {
 				e.printStackTrace();
 			}
 		}
-		return post;
-	}
-	
-	/* ÐÞ¸ÄÍ·Ïñ
-	 * @return user
-	 */
-	@RequestMapping(value="/addpost", method=RequestMethod.POST)
-	public Post AddPost(HttpServletRequest request){
-		Post post = new Post();
-		post.setContent("1");
-		post.setContent("1");
-		return post;
+		
+		return postService.save(post);
 	}
 	
 }

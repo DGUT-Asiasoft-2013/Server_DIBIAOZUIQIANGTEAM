@@ -61,7 +61,7 @@ public class PostAPIController {
 			HttpServletRequest request){
 		Post post = new Post();
 		post.setPublishers(getCurrentUser(request));
-		post.setTitle(title);
+		post.setTitle(title); 
 		post.setContent(content);
 		post.setReward(reward);
 		post.setIssolve(false);

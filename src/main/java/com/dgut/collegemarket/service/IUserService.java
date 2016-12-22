@@ -2,6 +2,7 @@ package com.dgut.collegemarket.service;
 
 import com.dgut.collegemarket.entity.User;
 
+
 public interface IUserService {
 	User save(User user);
 	void login(String account, String passwordHash);

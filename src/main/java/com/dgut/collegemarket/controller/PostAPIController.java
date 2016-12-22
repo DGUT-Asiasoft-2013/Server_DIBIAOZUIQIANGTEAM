@@ -23,14 +23,12 @@ import com.dgut.collegemarket.service.IUserService;
 
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/post")
 public class PostAPIController {
 
 	@Autowired
 	IUserService userService;
 	
-	@Autowired
-	IRecordsService recordsService;
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
 	public @ResponseBody String hello(){
@@ -49,26 +47,6 @@ public class PostAPIController {
 		return userService.findById(uid);
 	}
 		
-	/**
-	 * 用户上传头像
-	 * @param avatar
-	 * @param request
-	 * @return	user
-	 */
-	@RequestMapping(value="/update/avatar", method=RequestMethod.POST)
-	public void UpdateAvatar(
-			MultipartFile avatar,
-			HttpServletRequest request){
-		if(avatar!=null){
-			try{
-				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
-				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,getCurrentUser(request).getId() + ".png"));
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
 	
 }

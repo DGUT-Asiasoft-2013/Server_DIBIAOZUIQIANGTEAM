@@ -13,7 +13,7 @@ public class Post extends DateRecord{
 	String albums;//帖子图集
 	double reward;//报酬
 	boolean issolve;//是否解决
-	
+	int browseVolume;//帖子的浏览量
 	
 	@ManyToOne(optional=false)
 	public User getPublishers() {
@@ -51,6 +51,12 @@ public class Post extends DateRecord{
 	}
 	public void setIssolve(boolean issolve) {
 		this.issolve = issolve;
+	}
+	public int getBrowseVolume() {
+		return browseVolume;
+	}
+	public void setBrowseVolume(int browseVolume) {
+		this.browseVolume = browseVolume;
 	}
 	
 	

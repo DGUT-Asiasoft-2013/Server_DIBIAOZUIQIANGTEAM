@@ -13,6 +13,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 @Repository
 public interface IPostCommentRepository extends PagingAndSortingRepository<PostComment, Integer>{
 
-	@Query("find PostComment postcomment where postcomment.post.id = ?1")
+	@Query("from PostComment postcomment where postcomment.post.id = ?1")
 	public Page<PostComment> findAllByPostCommentId(Integer postId,Pageable pageable);
 }

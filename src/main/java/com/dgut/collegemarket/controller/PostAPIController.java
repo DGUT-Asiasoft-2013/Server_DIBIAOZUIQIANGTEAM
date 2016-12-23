@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dgut.collegemarket.entity.Post;
+import com.dgut.collegemarket.entity.PostComment;
 import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.repository.IPostRepository;
+import com.dgut.collegemarket.service.IPostCommentService;
+import com.dgut.collegemarket.service.IPostService;
 import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
@@ -32,8 +36,10 @@ public class PostAPIController {
 	IUserService userService;
 	
 	@Autowired
-	IPostRepository postService;
+	IPostService postService;
 	
+	@Autowired
+	IPostCommentService postCommentService;
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
 	public @ResponseBody String hello(){
@@ -83,4 +89,41 @@ public class PostAPIController {
 		return postService.save(post);
 	}
 	
+	/**
+	 * 获取帖子
+	 * @return
+	 */
+	@RequestMapping(value="/getposts/{page}")
+	public Page<Post> getPosts(
+			@PathVariable int page){
+		return postService.getPosts(page);
+	}
+	
+	/**
+	 * 发布帖子评论
+	 * @return
+	 */
+	@RequestMapping(value="/{postId}/publish/postcomment",method=RequestMethod.POST)
+	public PostComment publishPostComment(
+			@RequestParam String content,
+			@PathVariable int postId,
+			HttpServletRequest request){
+		PostComment postComment = new PostComment();
+		postComment.setContent(content);
+		postComment.setCommentUser(getCurrentUser(request));
+		Post post = postService.findOne(postId);
+		postComment.setPost(post);
+		return postCommentService.save(postComment);
+	}
+	
+	/**
+	 * 获取帖子评论
+	 * @return
+	 */
+	@RequestMapping(value="/postcomment/{page}",method=RequestMethod.POST)
+	public Page<PostComment> getPostComments(
+			@PathVariable int page,
+			@RequestParam int postId){
+		return postCommentService.getPostCommentsByPostId(postId,page);
+	}
 }

@@ -13,6 +13,4 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 @Repository
 public interface IPostRepository extends PagingAndSortingRepository<Post, Integer>{
 
-	@Query("from Post post where post.id = ?1")
-	Page<Post> getPostByPostId(Integer id,Pageable pageable);
 }

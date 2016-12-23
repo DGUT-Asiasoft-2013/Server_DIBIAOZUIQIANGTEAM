@@ -9,7 +9,7 @@ import com.dgut.collegemarket.entity.User;
 
 
 public interface IPostService {
-	public Page<Post> findPost(Integer page, Pageable pageable);
+	public Page<Post> getPosts(Integer page);
 	public Post save(Post post);
-	
+	public Post findOne(Integer id);
 }

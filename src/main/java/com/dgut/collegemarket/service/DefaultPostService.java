@@ -17,6 +17,7 @@ import com.dgut.collegemarket.entity.Post;
 import com.dgut.collegemarket.repository.IPostRepository;
 
 
+
 @Component
 @Service
 @Transactional
@@ -27,7 +28,7 @@ public class DefaultPostService implements IPostService {
 	IPostRepository iPostResp;
 
 	@Override
-	public Page<Post> findPost(Integer page, Pageable pageable) {
+	public Page<Post> getPosts(Integer page) {
 		Sort sort = new Sort(Direction.DESC,"createDate");
 		PageRequest pageRequest = new PageRequest(page, 10, sort);
 		return iPostResp.findAll(pageRequest);
@@ -36,6 +37,11 @@ public class DefaultPostService implements IPostService {
 	@Override
 	public Post save(Post post) {
 		return iPostResp.save(post);
+	}
+
+	@Override
+	public Post findOne(Integer id) {
+		return iPostResp.findOne(id);
 	}
 	
 	

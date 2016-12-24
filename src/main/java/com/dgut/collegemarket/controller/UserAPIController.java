@@ -70,5 +70,39 @@ public class UserAPIController {
 		}
 	}
 	
-	
+	/**
+	 * 用户修改密码
+	 * @param avatar
+	 * @param request
+	 * @return	user
+	 */
+	@RequestMapping(value="/update/password", method=RequestMethod.POST)
+	public User UpdatePassword(
+			@RequestParam String newpassword,
+			HttpServletRequest request){
+		User user = getCurrentUser(request);
+		user.setPasswordHash(newpassword);
+		return userService.save(user);
+	}
+
+	/**
+	 * 用户忘记密码
+	 * @param avatar
+	 * @param request
+	 * @return	user  user/forget/password
+	 */
+	@RequestMapping(value="/forget/password", method=RequestMethod.POST)
+	public User ForgetPassword(
+			@RequestParam String account,
+			@RequestParam String newpassword){
+		
+		System.out.println(account);
+		System.out.println(newpassword);
+		User user = userService.findByAccount(account);
+		if(user==null){
+			return null;
+		}
+		user.setPasswordHash(newpassword);
+		return userService.save(user);
+	}
 }

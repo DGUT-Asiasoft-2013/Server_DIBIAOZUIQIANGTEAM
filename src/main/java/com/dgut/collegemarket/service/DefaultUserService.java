@@ -3,6 +3,10 @@ package com.dgut.collegemarket.service;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +59,13 @@ public class DefaultUserService implements IUserService {
 	@Override
 	public User findByAccount(String account) {
 		return userRepo.findUserByAccount(account);
+	}
+
+	@Override
+	public Page<User> searchUserWithKeyword(String keyword, int page) {
+		Sort sort = new Sort(Direction.DESC, "createDate");
+		PageRequest pageRequest = new PageRequest(page, 50, sort);
+		return userRepo.searchUserWithKeyword(keyword, pageRequest);
 	}
 
 }

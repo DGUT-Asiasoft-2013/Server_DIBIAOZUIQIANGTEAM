@@ -12,14 +12,18 @@ import javax.persistence.PrePersist;
 
 
 
+
 @Entity
 public class Subscriber{
 
+	
 	@Embeddable
 	public static class Key implements Serializable {
+		
 		User publishers;//发布者
 		User subscribers;//订阅者
 
+	
 		@ManyToOne(optional = false)
 		public User getPublishers() {
 			return publishers;
@@ -37,6 +41,8 @@ public class Subscriber{
 		public void setSubscribers(User subscribers) {
 			this.subscribers = subscribers;
 		}
+		
+		
 
 	}
 
@@ -44,6 +50,17 @@ public class Subscriber{
 
 	Date createDate;//订阅时间
 
+//	int subscriber_id;
+//	
+//	@EmbeddedId
+//	public int getSubscriber_id() {
+//		return subscriber_id;
+//	}
+//
+//	public void setId(int subscriber_id) {
+//		this.subscriber_id = subscriber_id;
+//	}
+//	
 	@EmbeddedId
 	public Key getId() {
 		return id;

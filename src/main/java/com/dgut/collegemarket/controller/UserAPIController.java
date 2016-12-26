@@ -32,13 +32,70 @@ public class UserAPIController {
 	@Autowired
 	IRecordsService recordsService;
 
-	@RequestMapping(value = "/hello", method=RequestMethod.GET)
-	public @ResponseBody String hello(){
-		return "HELLO  CollegeMarket!";
+	/**
+	 * 用户注册
+	 * @param account
+	 * @param passwordHash
+	 * @param email
+	 * @param name
+	 * @param avatar
+	 * @param request
+	 * @return	user
+	 */
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public User register(
+			@RequestParam String account,
+			@RequestParam String passwordHash,
+			@RequestParam String email,
+			@RequestParam String name,
+			MultipartFile avatar,
+			HttpServletRequest request){
+		
+		User user = new User();
+		user.setAccount(account);
+		user.setPasswordHash(passwordHash);
+		user.setName(name);
+		user.setCoin(0);
+		user.setEmail(email);
+		user.setXp(0);
+		if(avatar!=null){
+			try{
+				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
+				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,account+".png"));
+				user.setAvatar("upload/user/"+account+".png");
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return userService.save(user);
 	}
 	
 	/**
-	 * 找到当前用户
+	 * 用户的登录
+	 * @param account
+	 * @param passwordHash
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public User login(
+			@RequestParam String account,
+			@RequestParam String passwordHash,
+			HttpServletRequest request){
+		User user = userService.findByAccount(account);
+		if(user!=null && user.getPasswordHash().equals(passwordHash)){
+			HttpSession session = request.getSession(true);
+			session.setAttribute("uid", user.getId());
+			return user;
+		}else{
+			return null;
+		}
+	}
+	
+	/**
+	 * 获取到当前用户
 	 * @param request
 	 * @return user
 	 */

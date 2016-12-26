@@ -76,6 +76,7 @@ public class PostAPIController {
 		post.setReward(reward);
 		post.setIssolve(false);
 		post.setBrowseVolume(0);
+		postService.save(post);
 		if(albums!=null){
 			try{
 				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/post");

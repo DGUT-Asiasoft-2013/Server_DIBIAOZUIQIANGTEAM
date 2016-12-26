@@ -21,8 +21,9 @@ public class RootController {
 	public String index(ModelMap model){
 		model.addAttribute("message","Member Center Index");
 		return "index";
-	}
+	} 
 	
+//	
 //	@RequestMapping("/greeting")
 //    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
 //        model.addAttribute("name", name);

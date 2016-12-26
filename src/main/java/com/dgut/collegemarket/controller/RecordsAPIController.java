@@ -107,7 +107,7 @@ public class RecordsAPIController {
 	public int changeSubscribes(@PathVariable int publishers_id,
 			@RequestParam boolean subscribe, HttpServletRequest request) {
 		User me = getCurrentUser(request);
-		User publishers = subscribeService.findOne(publishers_id);
+		User publishers = userService.findById(publishers_id);
 
 		if (subscribe) {
 			subscribeService.addSubscriber(me, publishers);

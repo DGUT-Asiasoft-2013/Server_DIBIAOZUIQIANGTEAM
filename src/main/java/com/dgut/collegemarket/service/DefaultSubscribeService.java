@@ -40,11 +40,6 @@ public class DefaultSubscribeService implements ISubscribeService{
 	}
 
 	@Override
-	public User findOne(int publishers_id) {
-		return subscribeRepo.findOne(publishers_id);
-	}
-
-	@Override
 	public void addSubscriber(User subscribers, User publishers) {
 		Subscriber.Key key = new Key();
 		key.setSubscribers(subscribers);

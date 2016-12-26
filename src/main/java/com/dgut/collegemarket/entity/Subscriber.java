@@ -13,6 +13,7 @@ import javax.persistence.PrePersist;
 
 
 
+
 @Entity
 public class Subscriber{
 
@@ -42,7 +43,20 @@ public class Subscriber{
 			this.subscribers = subscribers;
 		}
 		
-		
+//		@Override
+//		public boolean equals(Object obj) {
+//			if(obj instanceof Key){
+//				Key other = (Key)obj;
+//				return subscribers.getId() == other.subscribers.getId() && publishers.getId() == other.publishers.getId();
+//			}else{
+//				return false;
+//			}
+//		}
+//		
+//		@Override
+//		public int hashCode() {
+//			return subscribers.getId();
+//		}
 
 	}
 
@@ -50,17 +64,6 @@ public class Subscriber{
 
 	Date createDate;//¶©ÔÄÊ±¼ä
 
-//	int subscriber_id;
-//	
-//	@EmbeddedId
-//	public int getSubscriber_id() {
-//		return subscriber_id;
-//	}
-//
-//	public void setId(int subscriber_id) {
-//		this.subscriber_id = subscriber_id;
-//	}
-//	
 	@EmbeddedId
 	public Key getId() {
 		return id;

@@ -16,16 +16,10 @@ public interface ISubscribeService {
 
 	boolean checkSubscribed(Integer id, int publishers_id);
 
-	User findOne(int publishers_id);
-
 	void addSubscriber(User me, User publishers);
 
 	void removeSubscriber(User me, User publishers);
 
 	int countSubscribers(int publishers_id);
-
-
-
-	
 
 }

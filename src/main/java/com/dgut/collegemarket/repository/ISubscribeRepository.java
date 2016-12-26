@@ -22,8 +22,5 @@ public interface ISubscribeRepository extends PagingAndSortingRepository<Subscri
 
 	@Query("select count(*) from Subscriber subscriber where subscriber.id.subscribers.id = ?1 and subscriber.id.publishers.id = ?2")
 	int checkSubscribeExsists(Integer id, int publishers_id);
-
-	@Query("select count(*) from Subscriber subscriber where subscriber.id.publishers.id = ?1")
-	User findOne(int publishers_id);
 	
 }

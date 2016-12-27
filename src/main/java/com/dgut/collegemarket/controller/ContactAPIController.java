@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dgut.collegemarket.entity.Contact;
+import com.dgut.collegemarket.entity.Goods;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IContactService;
 import com.dgut.collegemarket.service.IUserService;
@@ -45,24 +48,11 @@ public class ContactAPIController {
 	
 	
 	
-	@RequestMapping(value="/add", method=RequestMethod.POST)
-	public Contact register(
-			@RequestParam String name,
-			@RequestParam String phone,
-			@RequestParam String school,
-			@RequestParam String sushe,
-			HttpServletRequest request){
-		
-		Contact contact = new Contact();
 	
-		contact.setName(name);
-		contact.setPhone(phone);
-		contact.setSchool(school);
-		contact.setSushe(sushe);
-		
-		return contactService.save(contact);
+	
+	@RequestMapping(value = "/my/{page}")
+	public Page<Contact> getContactByUserId(@PathVariable int page,HttpServletRequest request) {
+		return contactService.getContactByUserId(getCurrentUser(request),page);
 	}
-	
-	
 	
 }

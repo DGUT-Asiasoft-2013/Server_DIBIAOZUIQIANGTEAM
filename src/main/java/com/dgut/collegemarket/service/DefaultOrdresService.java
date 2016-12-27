@@ -1,6 +1,6 @@
 package com.dgut.collegemarket.service;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,29 +11,34 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dgut.collegemarket.entity.Contact;
-import com.dgut.collegemarket.entity.User;
-import com.dgut.collegemarket.repository.IContactRepository;
-import com.dgut.collegemarket.repository.IUserRepository;
+import com.dgut.collegemarket.entity.Admin;
+import com.dgut.collegemarket.entity.Goods;
+import com.dgut.collegemarket.repository.IAdminRepository;
+import com.dgut.collegemarket.repository.IGoodsRepository;
 
 @Component
 @Service
 @Transactional
-public class DefaultContactService implements IContactService {
+public class DefaultGoodsService implements IGoodsService {
 
 	@Autowired
-	IContactRepository contactRepo;
+	IGoodsRepository goodsRepo;
+
 
 	@Override
-	public Contact save(Contact contact) {
-		return contactRepo.save(contact);
+	public Goods save(Goods goods) {
+		return goodsRepo.save(goods);
 	}
 
+
 	@Override
-	public Page<Contact> getContactByUserId(User currentUser, int page) {
+	public Page<Goods> getGoodsPage(int page) {
+		
 		Sort sort = new Sort(Direction.DESC,"createDate");
         PageRequest pageRequest=new PageRequest(page, 10, sort);
-		return contactRepo.getContactByUserId(currentUser.getId(),pageRequest);
+		
+		return goodsRepo.findAll(pageRequest);
 	}
-
+	
+	
 }

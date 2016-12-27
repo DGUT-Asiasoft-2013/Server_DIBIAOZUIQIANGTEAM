@@ -12,8 +12,8 @@ public class Contact extends DateRecord{
 	User user;
 	String name;//姓名
 	String phone;//电话
-	String address;//地址
-	
+	String school;//学校
+	String sushe;//宿舍
 	
 	@ManyToOne(optional=false)
 	public User getUser() {
@@ -34,12 +34,19 @@ public class Contact extends DateRecord{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
+	public String getSchool() {
+		return school;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setSchool(String school) {
+		this.school = school;
 	}
+	public String getSushe() {
+		return sushe;
+	}
+	public void setSushe(String sushe) {
+		this.sushe = sushe;
+	}
+
 
 	
 

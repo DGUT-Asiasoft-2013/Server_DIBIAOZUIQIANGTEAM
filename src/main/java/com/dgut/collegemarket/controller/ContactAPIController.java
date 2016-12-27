@@ -13,16 +13,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.dgut.collegemarket.entity.Contact;
 import com.dgut.collegemarket.entity.User;
+import com.dgut.collegemarket.service.IContactService;
 import com.dgut.collegemarket.service.IUserService;
 
 
 @RestController
-@RequestMapping("/api/message")
+@RequestMapping("/api/contact")
 public class ContactAPIController {
 
 	@Autowired
 	IUserService userService;
+	
+	@Autowired
+	IContactService contactService;
+	
 	
 	/**
 	 * 找到当前用户
@@ -35,5 +42,27 @@ public class ContactAPIController {
 		return userService.findById(uid);
 	}
 		
+	
+	
+	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	public Contact register(
+			@RequestParam String name,
+			@RequestParam String phone,
+			@RequestParam String school,
+			@RequestParam String sushe,
+			HttpServletRequest request){
+		
+		Contact contact = new Contact();
+	
+		contact.setName(name);
+		contact.setPhone(phone);
+		contact.setSchool(school);
+		contact.setSushe(sushe);
+		
+		return contactService.save(contact);
+	}
+	
+	
 	
 }

@@ -22,4 +22,8 @@ public interface ISubscribeService {
 
 	int countSubscribers(int publishers_id);
 
+	Page<Subscriber> getPublishersByUserId(User currentUser, int i);
+
+	Page<Subscriber> getSubscribersByUserId(User currentUser, int i);
+
 }

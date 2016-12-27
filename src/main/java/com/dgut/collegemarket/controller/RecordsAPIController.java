@@ -18,7 +18,7 @@ import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
 @RestController
-@RequestMapping("/api/record")
+@RequestMapping("/api/rec")
 public class RecordsAPIController {
 
 	@Autowired

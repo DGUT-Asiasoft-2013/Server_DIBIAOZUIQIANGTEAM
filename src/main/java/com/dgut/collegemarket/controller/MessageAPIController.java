@@ -18,7 +18,7 @@ import com.dgut.collegemarket.service.IUserService;
 
 
 @RestController
-@RequestMapping("/api/likes")
+@RequestMapping("/api/message")
 public class MessageAPIController {
 
 	@Autowired

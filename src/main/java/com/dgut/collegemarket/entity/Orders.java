@@ -17,7 +17,8 @@ public class Orders extends DateRecord{
 	Contact contact;//联系信息
 	double price;//价格
 	int quantity;//商品数量
-	
+	String note;
+	boolean isPayOnline;
 	
 	@ManyToOne(optional=false)
 	public User getBuyer() {
@@ -53,6 +54,18 @@ public class Orders extends DateRecord{
 	}
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public boolean isPayOnline() {
+		return isPayOnline;
+	}
+	public void setPayOnline(boolean isPayOnline) {
+		this.isPayOnline = isPayOnline;
 	}
 
 

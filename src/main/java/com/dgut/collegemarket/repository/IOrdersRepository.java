@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.dgut.collegemarket.entity.Admin;
 import com.dgut.collegemarket.entity.Goods;
+import com.dgut.collegemarket.entity.Orders;
 
 @Repository
-public interface IGoodsRepository extends PagingAndSortingRepository<Goods, Integer>{
+public interface IOrdersRepository extends PagingAndSortingRepository<Orders, Integer>{
 
 
 }

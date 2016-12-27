@@ -9,4 +9,6 @@ import com.dgut.collegemarket.entity.User;
 public interface IContactService {
 	Contact save(Contact contact);
 
+	Page<Contact> getContactByUserId(User currentUser, int page);
+
 }

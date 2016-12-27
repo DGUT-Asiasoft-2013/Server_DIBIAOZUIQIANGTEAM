@@ -29,4 +29,11 @@ public class DefaultContactService implements IContactService {
 		return contactRepo.save(contact);
 	}
 
+	@Override
+	public Page<Contact> getContactByUserId(User currentUser, int page) {
+		Sort sort = new Sort(Direction.DESC,"createDate");
+        PageRequest pageRequest=new PageRequest(page, 10, sort);
+		return contactRepo.getContactByUserId(currentUser.getId(),pageRequest);
+	}
+
 }

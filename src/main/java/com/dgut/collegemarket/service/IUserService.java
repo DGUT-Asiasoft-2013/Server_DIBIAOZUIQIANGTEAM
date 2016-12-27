@@ -13,5 +13,6 @@ public interface IUserService {
 	void logout();
 	User findById(Integer id);
 	User findByAccount(String account);
+	User findByEmail(String email);
 	Page<User> searchUserWithKeyword(String keyword, int page);
 }

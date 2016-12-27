@@ -68,4 +68,9 @@ public class DefaultUserService implements IUserService {
 		return userRepo.searchUserWithKeyword(keyword, pageRequest);
 	}
 
+	@Override
+	public User findByEmail(String email) {
+		return userRepo.findUserByEmail(email);
+	}
+
 }

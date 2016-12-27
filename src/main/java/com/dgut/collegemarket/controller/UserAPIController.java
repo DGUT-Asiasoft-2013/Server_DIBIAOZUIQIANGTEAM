@@ -150,12 +150,10 @@ public class UserAPIController {
 	 */
 	@RequestMapping(value="/forget/password", method=RequestMethod.POST)
 	public User ForgetPassword(
-			@RequestParam String account,
+			@RequestParam String email,
 			@RequestParam String newpassword){
 		
-		System.out.println(account);
-		System.out.println(newpassword);
-		User user = userService.findByAccount(account);
+		User user = userService.findByEmail(email);
 		if(user==null){
 			return null;
 		}

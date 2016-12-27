@@ -1,6 +1,7 @@
 package com.dgut.collegemarket.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,6 +32,9 @@ public class Sign extends BaseEntity{
 	@ManyToOne(optional=false)
 	public User getUser() {
 		return user;
+		
+		
+		
 	}
 
 	public void setUser(User user) {

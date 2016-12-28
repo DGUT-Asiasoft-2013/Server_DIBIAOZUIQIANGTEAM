@@ -39,6 +39,12 @@ public class DefaultGoodsService implements IGoodsService {
 		
 		return goodsRepo.findAll(pageRequest);
 	}
+
+
+	@Override
+	public Goods findOne(int goods_id) {
+		return goodsRepo.findOne(goods_id);
+	}
 	
 	
 }

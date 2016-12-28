@@ -11,4 +11,6 @@ public interface IContactService {
 
 	Page<Contact> getContactByUserId(User currentUser, int page);
 
+	Contact findOne(int contact_id);
+
 }

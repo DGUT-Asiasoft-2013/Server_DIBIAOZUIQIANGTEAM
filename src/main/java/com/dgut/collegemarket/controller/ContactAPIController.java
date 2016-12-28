@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dgut.collegemarket.entity.Contact;
 import com.dgut.collegemarket.entity.Goods;
+import com.dgut.collegemarket.entity.Orders;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IContactService;
 import com.dgut.collegemarket.service.IUserService;
@@ -45,8 +46,23 @@ public class ContactAPIController {
 		return userService.findById(uid);
 	}
 		
-	
-	
+	@RequestMapping(value="/add", method=RequestMethod.POST)
+	 	public Contact register(
+	 			@RequestParam String name,
+				@RequestParam String phone,
+	 			@RequestParam String school,
+	 			@RequestParam String sushe,
+	 			HttpServletRequest request){
+	 		
+	 		Contact contact = new Contact();
+	 		contact.setUser(getCurrentUser(request));
+	 		contact.setName(name);
+	 		contact.setPhone(phone);
+	 		contact.setSchool(school);
+	 		contact.setSushe(sushe);
+	 		
+	 		return contactService.save(contact);
+	 }
 	
 	
 	

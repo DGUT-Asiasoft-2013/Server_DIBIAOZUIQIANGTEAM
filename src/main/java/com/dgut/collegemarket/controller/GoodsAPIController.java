@@ -92,22 +92,4 @@ public class GoodsAPIController {
 
 
 	
-//	@RequestMapping(value = "/article/{article_id}/comments")
-//	public Page<Comment> getComments(@PathVariable int article_id) {
-//		return commentService.findAllByArticleId(article_id, 0);
-//	}
-//
-//	@RequestMapping(value = "/article/{article_id}/comments", method = RequestMethod.POST)
-//	public @ResponseBody Comment saveComment(@PathVariable int article_id,
-//			@RequestParam String content, HttpServletRequest request) {
-//
-//		User me = getCurrentUser(request);
-//		Article article = articleService.findOne(article_id);
-//		Comment comment = new Comment();
-//		comment.setAuthor(me);
-//		comment.setArticle(article);
-//		comment.setContent(content);
-//		return commentService.save(comment);
-//	}
-	
 }

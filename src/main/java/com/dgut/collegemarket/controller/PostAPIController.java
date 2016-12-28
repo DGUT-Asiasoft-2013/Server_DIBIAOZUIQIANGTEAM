@@ -47,7 +47,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * ÕÒµ½µ±Ç°ÓÃ»§
+	 * ï¿½Òµï¿½ï¿½ï¿½Ç°ï¿½Ã»ï¿½
 	 * @param requestPost
 	 * @return user
 	 */
@@ -59,7 +59,7 @@ public class PostAPIController {
 	}
 		
 	/**
-	 * ·¢²¼Ìû×Ó
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping(value="/addpost", method=RequestMethod.POST)
@@ -91,7 +91,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * »ñÈ¡Ìû×Ó
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping(value="/getposts/{page}")
@@ -101,7 +101,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * ·¢²¼Ìû×ÓÆÀÂÛ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping(value="/{postId}/publish/postcomment",method=RequestMethod.POST)
@@ -118,13 +118,14 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * »ñÈ¡Ìû×ÓÆÀÂÛ
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
 	@RequestMapping(value="/postcomment/{page}",method=RequestMethod.POST)
 	public Page<PostComment> getPostComments(
 			@PathVariable int page,
 			@RequestParam int postId){
+		
 		return postCommentService.getPostCommentsByPostId(postId,page);
 	}
 }

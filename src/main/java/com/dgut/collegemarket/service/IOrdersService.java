@@ -9,5 +9,5 @@ import com.dgut.collegemarket.entity.User;
 public interface IOrdersService {
 	Orders save(Orders orders);
 
-	
+	Page<Orders> findOrdersPageByBuyerId(User buyer);
 }

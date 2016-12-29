@@ -128,4 +128,21 @@ public class PostAPIController {
 		
 		return postCommentService.getPostCommentsByPostId(postId,page);
 	}
+	
+	/**
+	 * 采纳评论
+	 * @param accepterId
+	 * @param postId
+	 * @return
+	 */
+	@RequestMapping(value="/postcomment/accept",method=RequestMethod.POST)
+	public Post AcceptPostComments(
+			@RequestParam int accepterId,
+			@RequestParam int postId){
+		boolean result = false;
+		Post post =  postService.findOne(postId);
+		post.setIssolve(true);
+		post.setAccepterId(accepterId);
+		return postService.save(post);
+	}
 }

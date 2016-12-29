@@ -1,19 +1,23 @@
 package com.dgut.collegemarket.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import com.dgut.collegemarket.util.DateRecord;
 
 @Entity
 public class Post extends DateRecord{
-	User publishers;//·¢²¼Õß
-	String title;//±êÌâ
-	String content;//ÄÚÈÝ
-	String albums;//Ìû×ÓÍ¼¼¯
-	double reward;//±¨³ê
-	boolean issolve;//ÊÇ·ñ½â¾ö
-	int browseVolume;//Ìû×ÓµÄä¯ÀÀÁ¿
+	User publishers;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	int accepterId;
+	String title;//ï¿½ï¿½ï¿½ï¿½
+	String content;//ï¿½ï¿½ï¿½ï¿½
+	String albums;//ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+	double reward;//ï¿½ï¿½ï¿½ï¿½
+	boolean issolve;//ï¿½Ç·ï¿½ï¿½ï¿½
+	int browseVolume;//ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@ManyToOne(optional=false)
 	public User getPublishers() {
@@ -58,6 +62,15 @@ public class Post extends DateRecord{
 	public void setBrowseVolume(int browseVolume) {
 		this.browseVolume = browseVolume;
 	}
+	@Column(nullable=true)
+	public int getAccepterId() {
+		return accepterId;
+	}
+	public void setAccepterId(int accepterId) {
+		this.accepterId = accepterId;
+	}
+	
+	
 	
 	
 

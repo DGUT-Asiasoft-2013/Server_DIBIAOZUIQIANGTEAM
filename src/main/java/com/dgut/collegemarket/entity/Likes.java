@@ -23,19 +23,10 @@ public class Likes{
 	
 	@Embeddable
 	public static class Key implements Serializable {
-		
-		User publishers;//发布者
+		Post post;
 		User subscribers;//点赞者
-
+		
 	
-		@ManyToOne(optional = false)
-		public User getPublishers() {
-			return publishers;
-		}
-
-		public void setPublishers(User publishers) {
-			this.publishers = publishers;
-		}
 		
 		@ManyToOne(optional = false)
 		public User getSubscribers() {
@@ -45,13 +36,20 @@ public class Likes{
 		public void setSubscribers(User subscribers) {
 			this.subscribers = subscribers;
 		}
-		
+		@ManyToOne(optional=false)
+		public Post getPost() {
+			return post;
+		}
+
+		public void setPost(Post post) {
+			this.post = post;
+		}
 		
 
 	}
 
 	Key id;
-
+	
 	Date createDate;//点赞时间
 
 
@@ -63,7 +61,8 @@ public class Likes{
 	public void setId(Key id) {
 		this.id = id;
 	}
-
+	
+	
 
 	@Column(updatable = false)
 	public Date getCreateDate() {

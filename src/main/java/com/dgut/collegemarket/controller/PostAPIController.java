@@ -47,7 +47,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * �ҵ���ǰ�û�
+	 *
 	 * @param requestPost
 	 * @return user
 	 */
@@ -59,7 +59,7 @@ public class PostAPIController {
 	}
 		
 	/**
-	 * ��������
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value="/addpost", method=RequestMethod.POST)
@@ -91,7 +91,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * ��ȡ����
+	 *
 	 * @return
 	 */
 	@RequestMapping(value="/getposts/{page}")
@@ -101,7 +101,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * ������������
+	 *
 	 * @return
 	 */
 	@RequestMapping(value="/{postId}/publish/postcomment",method=RequestMethod.POST)
@@ -118,7 +118,7 @@ public class PostAPIController {
 	}
 	
 	/**
-	 * ��ȡ��������
+	 *
 	 * @return
 	 */
 	@RequestMapping(value="/postcomment/{page}",method=RequestMethod.POST)
@@ -139,10 +139,20 @@ public class PostAPIController {
 	public Post AcceptPostComments(
 			@RequestParam int accepterId,
 			@RequestParam int postId){
-		boolean result = false;
+		System.out.println(accepterId);
+		System.out.println(postId);
 		Post post =  postService.findOne(postId);
 		post.setIssolve(true);
 		post.setAccepterId(accepterId);
+		
+		User acceptuser = postCommentService.findOne(accepterId).getCommentUser();
+		acceptuser.setCoin(post.getReward()+acceptuser.getCoin());
+		userService.save(acceptuser);
+		
+//		User publishuser = post.getPublishers();
+//		publishuser.setCoin(publishuser.getCoin()-post.getReward());
+//		userService.save(publishuser);
+		
 		return postService.save(post);
 	}
 }

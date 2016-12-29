@@ -54,7 +54,7 @@ public class OrdersProgressAPIController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public OrdersProgress addOrdersProgress(@RequestParam int orders_id,
-			@RequestParam String  content, @RequestParam String title,
+			@RequestParam String  content, @RequestParam String title, @RequestParam int state,
 		 HttpServletRequest request) {
 
 		Orders orders=new Orders();
@@ -64,6 +64,9 @@ public class OrdersProgressAPIController {
 		progress.setTitle(title);
 		progress.setOrders(orders);
 		progress = ordersProgressService.save(progress);
+		orders=ordersService.findOne(orders_id);
+		orders.setState(state);
+		ordersService.save(orders);
 		return progress;
 	}
 

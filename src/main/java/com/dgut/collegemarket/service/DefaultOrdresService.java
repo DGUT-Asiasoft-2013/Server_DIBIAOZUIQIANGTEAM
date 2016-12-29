@@ -50,6 +50,12 @@ public class DefaultOrdresService implements IOrdersService {
 		return ordersRepo.findOrdersPageByUserId(id,publishers_id,pageRequest);
 	}
 
+	@Override
+	public Orders findOne(int orders_id) {
+		// TODO Auto-generated method stub
+		return ordersRepo.findOne(orders_id);
+	}
+
 	
 
 }

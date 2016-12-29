@@ -33,7 +33,7 @@ public class DefaultOrdresProgressService implements IOrdersProgressService {
 	@Override
 	public Page<OrdersProgress> findOrdersProgressPageByOrdersId(
 			Integer orders_id, int page) {
-		Sort sort = new Sort(Direction.DESC,"createDate");
+		Sort sort = new Sort(Direction.ASC,"createDate");
         PageRequest pageRequest=new PageRequest(page, 10, sort);
 		return ordersProgressRepository.findOrdersProgressPageByOrdersId(orders_id,pageRequest);
 	}

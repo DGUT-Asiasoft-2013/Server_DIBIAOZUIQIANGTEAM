@@ -15,4 +15,7 @@ public interface IOrdersService {
 
 	Page<Orders> findOrdersPageByUserId(Integer id, int publishers_id, int page);
 
+
+	Orders findOne(int orders_id);
+
 }

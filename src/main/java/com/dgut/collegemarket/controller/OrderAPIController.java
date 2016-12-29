@@ -78,8 +78,10 @@ public class OrderAPIController {
 		orders.setPayOnline(isPayOnline);
 		orders.setState(1);
 		orders = ordersService.save(orders);
-		addOrdersProgress(orders.getId(),"请等待对方接单","订单已发出");
+		addOrdersProgress(orders.getId(),"请等待卖方接单","新订单");
 		
+		goods.setQuantity(goods.getQuantity()-quantity);
+		goodsService.save(goods);
 	
 		return orders;
 	}

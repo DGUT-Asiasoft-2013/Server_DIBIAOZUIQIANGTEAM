@@ -19,6 +19,8 @@ public class Orders extends DateRecord{
 	int quantity;//商品数量
 	String note;
 	boolean isPayOnline;
+	int state;//状态（1表示订单刚提交，未接单；2表示已经接单，3表示已配送，4表示确认收货，交易完成，5表示已经评价）
+	
 	
 	@ManyToOne(optional=false)
 	public User getBuyer() {
@@ -66,6 +68,12 @@ public class Orders extends DateRecord{
 	}
 	public void setPayOnline(boolean isPayOnline) {
 		this.isPayOnline = isPayOnline;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
 	}
 
 

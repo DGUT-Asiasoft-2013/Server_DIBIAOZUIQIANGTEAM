@@ -29,8 +29,8 @@ import com.dgut.collegemarket.service.IOrdersService;
 import com.dgut.collegemarket.service.IUserService;
 
 @RestController
-@RequestMapping("/api/orders")
-public class OrderAPIController {
+@RequestMapping("/api/orders/progress")
+public class OrdersProgressAPIController {
 
 	@Autowired
 	IUserService userService;
@@ -39,17 +39,10 @@ public class OrderAPIController {
 	IOrdersService ordersService;
 
 	@Autowired
-	IContactService contactService;
-
-	@Autowired
-	IGoodsService goodsService;
-
-	@Autowired
 	IOrdersProgressService ordersProgressService;
 	
 	/**
-	 * 找到当前用户
-	 * 
+	 * 找到当前用户 
 	 * @param request
 	 * @return user
 	 */
@@ -60,51 +53,9 @@ public class OrderAPIController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Orders addOrdres(@RequestParam int goods_id,
-			@RequestParam int contact_id, @RequestParam double price,
-			@RequestParam int quantity, @RequestParam String note,
-			@RequestParam boolean isPayOnline, HttpServletRequest request) {
-
-		Goods goods = goodsService.findOne(goods_id);
-		Contact contact = contactService.findOne(contact_id);
-
-		Orders orders = new Orders();
-		orders.setBuyer(getCurrentUser(request));
-		orders.setGoods(goods);
-		orders.setContact(contact);
-		orders.setPrice(price);
-		orders.setQuantity(quantity);
-		orders.setNote(note);
-		orders.setPayOnline(isPayOnline);
-		orders.setState(1);
-		orders = ordersService.save(orders);
-		addOrdersProgress(orders.getId(),"请等待对方接单","订单已发出");
-		
-	
-		return orders;
-	}
-
-	@RequestMapping(value = "/my/buy/{page}")
-	public Page<Orders> findOrdersPageByBuyerId(@PathVariable int page,
-			HttpServletRequest request) {
-
-		User user = getCurrentUser(request);
-
-		return ordersService.findOrdersPageByBuyerId(user.getId(), page);
-	}
-
-	@RequestMapping(value = "/my/all/{page}")
-	public Page<Orders> findOrdersPageByUserId(@PathVariable int page,
-			HttpServletRequest request) {
-
-		User user = getCurrentUser(request);
-
-		return ordersService.findOrdersPageByUserId(user.getId(), user.getId(),
-				page);
-	}
-
-	public OrdersProgress addOrdersProgress( int orders_id,
-		String  content,String title) {
+	public OrdersProgress addOrdersProgress(@RequestParam int orders_id,
+			@RequestParam String  content, @RequestParam String title,
+		 HttpServletRequest request) {
 
 		Orders orders=new Orders();
 		orders.setId(orders_id);
@@ -115,5 +66,16 @@ public class OrderAPIController {
 		progress = ordersProgressService.save(progress);
 		return progress;
 	}
+
+	@RequestMapping(value = "/byOrdersId/{page}", method = RequestMethod.POST)
+	public Page<OrdersProgress> findOrdersProgressPageByOrdersId(@PathVariable int page,@RequestParam int orders_id,
+			HttpServletRequest request) {
+
+		return ordersProgressService.findOrdersProgressPageByOrdersId(orders_id, page);
+	}
+
+
+
+	
 	
 }

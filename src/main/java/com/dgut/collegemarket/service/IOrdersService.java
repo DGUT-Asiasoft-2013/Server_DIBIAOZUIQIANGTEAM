@@ -10,6 +10,9 @@ public interface IOrdersService {
 	Orders save(Orders orders);
 
 
-	Page<Orders> findOrdersPageByBuyerId(User buyer);
+	Page<Orders> findOrdersPageByBuyerId(Integer id, int page);
+
+
+	Page<Orders> findOrdersPageByUserId(Integer id, int publishers_id, int page);
 
 }

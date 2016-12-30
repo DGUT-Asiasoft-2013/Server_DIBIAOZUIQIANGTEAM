@@ -67,6 +67,30 @@ public class OrdersProgressAPIController {
 		orders=ordersService.findOne(orders_id);
 		orders.setState(state);
 		ordersService.save(orders);
+		
+		if(orders.getBuyer().getId()==getCurrentUser(request).getId())
+		{
+			if(state==1)
+			{
+				User buyer = orders.getBuyer();
+				buyer.setCoin(buyer.getCoin()-orders.getPrice());
+				userService.save(buyer);
+			}
+			if(state==7)
+			{
+				User buyer = orders.getBuyer();
+				buyer.setCoin(buyer.getCoin()+orders.getPrice());
+				userService.save(buyer);
+			}
+		}
+		else{
+			if(state==5)
+			{
+				User publishers = orders.getGoods().getPublishers();
+				publishers.setCoin(publishers.getCoin()+orders.getPrice());
+				userService.save(publishers);
+			}
+		}
 		return progress;
 	}
 

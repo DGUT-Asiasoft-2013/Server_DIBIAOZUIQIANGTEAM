@@ -160,4 +160,22 @@ public class UserAPIController {
 		user.setPasswordHash(newpassword);
 		return userService.save(user);
 	}
+	
+	/**
+	 * 修改用户名称
+	 * @param username
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/update/username", method=RequestMethod.POST)
+	public User UpdateUserName(
+			@RequestParam String username,
+			HttpServletRequest request){
+		User user = getCurrentUser(request);
+		if(user==null){
+			return null;
+		}
+		user.setName(username);
+		return userService.save(user);
+	}
 }

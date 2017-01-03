@@ -21,11 +21,13 @@ import com.dgut.collegemarket.entity.Contact;
 import com.dgut.collegemarket.entity.Goods;
 import com.dgut.collegemarket.entity.Orders;
 import com.dgut.collegemarket.entity.OrdersProgress;
+import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IContactService;
 import com.dgut.collegemarket.service.IGoodsService;
 import com.dgut.collegemarket.service.IOrdersProgressService;
 import com.dgut.collegemarket.service.IOrdersService;
+import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
 @RestController
@@ -37,10 +39,15 @@ public class OrdersProgressAPIController {
 
 	@Autowired
 	IOrdersService ordersService;
+	
+	@Autowired
+	IGoodsService goodsService;
 
 	@Autowired
 	IOrdersProgressService ordersProgressService;
 	
+	@Autowired
+	IRecordsService recordsService;
 	/**
 	 * 找到当前用户 
 	 * @param request
@@ -66,31 +73,32 @@ public class OrdersProgressAPIController {
 		progress = ordersProgressService.save(progress);
 		orders=ordersService.findOne(orders_id);
 		orders.setState(state);
-		ordersService.save(orders);
+		orders=	ordersService.save(orders);
 		
-		if(orders.getBuyer().getId()==getCurrentUser(request).getId())
-		{
-			if(state==1)
-			{
-				User buyer = orders.getBuyer();
-				buyer.setCoin(buyer.getCoin()-orders.getPrice());
-				userService.save(buyer);
-			}
+		
+		
+			
 			if(state==7)
 			{
 				User buyer = orders.getBuyer();
-				buyer.setCoin(buyer.getCoin()+orders.getPrice());
-				userService.save(buyer);
+				buyer.setCoin(buyer.getCoin()+orders.getPrice()*orders.getQuantity());
+				User user=	userService.save(buyer);
+				
+				Goods goods = goodsService.findOne(orders.getGoods().getId());
+				goods.setQuantity(goods.getQuantity()+orders.getQuantity());
+				goodsService.save(goods);
+				
+				addRecords(user,"订单("+orders.getId()+") 退款了",orders.getPrice()*orders.getQuantity());
 			}
-		}
-		else{
-			if(state==5)
+			if(state==4)
 			{
 				User publishers = orders.getGoods().getPublishers();
-				publishers.setCoin(publishers.getCoin()+orders.getPrice());
-				userService.save(publishers);
+				publishers.setCoin(publishers.getCoin()+orders.getPrice()*orders.getQuantity());
+				User user=	userService.save(publishers);
+				addRecords(user,"订单("+orders.getId()+") 赚取了",orders.getPrice()*orders.getQuantity());
 			}
-		}
+		
+		
 		return progress;
 	}
 
@@ -102,7 +110,16 @@ public class OrdersProgressAPIController {
 	}
 
 
+	public Records addRecords(User user, String cause, double coin
+			) {
+		Records records = new Records();
+		records.setCause(cause);
+		records.setUser(user);
+		records.setCoin(coin);
+		records = recordsService.save(records);
+		return records;
 
+	}
 	
 	
 }

@@ -21,11 +21,13 @@ import com.dgut.collegemarket.entity.Contact;
 import com.dgut.collegemarket.entity.Goods;
 import com.dgut.collegemarket.entity.Orders;
 import com.dgut.collegemarket.entity.OrdersProgress;
+import com.dgut.collegemarket.entity.Records;
 import com.dgut.collegemarket.entity.User;
 import com.dgut.collegemarket.service.IContactService;
 import com.dgut.collegemarket.service.IGoodsService;
 import com.dgut.collegemarket.service.IOrdersProgressService;
 import com.dgut.collegemarket.service.IOrdersService;
+import com.dgut.collegemarket.service.IRecordsService;
 import com.dgut.collegemarket.service.IUserService;
 
 @RestController
@@ -47,6 +49,8 @@ public class OrderAPIController {
 	@Autowired
 	IOrdersProgressService ordersProgressService;
 	
+	@Autowired
+	IRecordsService recordsService;
 	/**
 	 * 找到当前用户
 	 * 
@@ -78,10 +82,19 @@ public class OrderAPIController {
 		orders.setPayOnline(isPayOnline);
 		orders.setState(1);
 		orders = ordersService.save(orders);
-		addOrdersProgress(orders.getId(),"请等待卖方接单","新订单");
+		addOrdersProgress(orders.getId(),"新订单","请等待卖方接单");
 		
 		goods.setQuantity(goods.getQuantity()-quantity);
 		goodsService.save(goods);
+	
+
+		
+			User buyer = orders.getBuyer();
+			buyer.setCoin(buyer.getCoin()-orders.getPrice()*orders.getQuantity());
+			User user=	userService.save(buyer);
+			addRecords(user,"下订单("+orders.getId()+") 扣除了",orders.getPrice()*orders.getQuantity());
+	
+		
 	
 		return orders;
 	}
@@ -117,5 +130,14 @@ public class OrderAPIController {
 		progress = ordersProgressService.save(progress);
 		return progress;
 	}
-	
+	public Records addRecords(User user, String cause, double coin
+			) {
+		Records records = new Records();
+		records.setCause(cause);
+		records.setUser(user);
+		records.setCoin(coin);
+		records = recordsService.save(records);
+		return records;
+
+	}
 }

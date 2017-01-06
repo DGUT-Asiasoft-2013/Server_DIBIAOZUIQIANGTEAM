@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dgut.collegemarket.entity.Orders;
 import com.dgut.collegemarket.entity.Post;
 import com.dgut.collegemarket.entity.PostComment;
 import com.dgut.collegemarket.entity.Records;
@@ -40,6 +41,9 @@ public class PostAPIController {
 	
 	@Autowired
 	IPostCommentService postCommentService;
+	
+	@Autowired
+	IRecordsService recordsService;
 
 	@RequestMapping(value = "/hello", method=RequestMethod.GET)
 	public @ResponseBody String hello(){
@@ -148,11 +152,24 @@ public class PostAPIController {
 		User acceptuser = postCommentService.findOne(accepterId).getCommentUser();
 		acceptuser.setCoin(post.getReward()+acceptuser.getCoin());
 		userService.save(acceptuser);
+		User user=	userService.save(acceptuser);
+		addRecords(user,"文章评论被采纳"+" 赚取了",post.getReward());
 		
 //		User publishuser = post.getPublishers();
 //		publishuser.setCoin(publishuser.getCoin()-post.getReward());
 //		userService.save(publishuser);
 		
 		return postService.save(post);
+	}
+	
+	public Records addRecords(User user, String cause, double coin
+			) {
+		Records records = new Records();
+		records.setCause(cause);
+		records.setUser(user);
+		records.setCoin(coin);
+		records = recordsService.save(records);
+		return records;
+
 	}
 }

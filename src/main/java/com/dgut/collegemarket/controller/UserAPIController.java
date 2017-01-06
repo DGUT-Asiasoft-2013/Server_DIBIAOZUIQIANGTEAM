@@ -45,29 +45,14 @@ public class UserAPIController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public User register(
 			@RequestParam String account,
-			@RequestParam String passwordHash,
-			@RequestParam String email,
-			@RequestParam String name,
-			MultipartFile avatar,
-			HttpServletRequest request){
-		
+			@RequestParam String passwordHash){
 		User user = new User();
 		user.setAccount(account);
 		user.setPasswordHash(passwordHash);
-		user.setName(name);
+		user.setName("用户名");
 		user.setCoin(0);
-		user.setEmail(email);
+		user.setEmail("邮箱地址");
 		user.setXp(0);
-		if(avatar!=null){
-			try{
-				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
-				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,account+".png"));
-				user.setAvatar("upload/user/"+account+".png");
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
 		
 		return userService.save(user);
 	}

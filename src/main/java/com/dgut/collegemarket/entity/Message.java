@@ -3,6 +3,7 @@ package com.dgut.collegemarket.entity;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import com.dgut.collegemarket.util.CreateDateRecord;
 import com.dgut.collegemarket.util.DateRecord;
 
 
@@ -11,7 +12,7 @@ import com.dgut.collegemarket.util.DateRecord;
  *私信消息表
  */
 @Entity
-public class Message extends DateRecord{
+public class Message extends CreateDateRecord{
 	
 	User sender;//发送者
 	User receiver;//接收者

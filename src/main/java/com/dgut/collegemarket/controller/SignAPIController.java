@@ -65,11 +65,14 @@ public class SignAPIController {
 		if(getCurrentUser(request)==null){
 			return null;
 		}
+
 		User user = getCurrentUser(request);
 		user.setXp(user.getXp()+xp);
 		userService.save(user);
 		
 		sign.setUser(user);
+				
+		
 		return signService.save(sign);
 	}
 	

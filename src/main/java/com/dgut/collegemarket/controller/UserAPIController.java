@@ -101,11 +101,13 @@ public class UserAPIController {
 	public void UpdateAvatar(
 			MultipartFile avatar,
 			HttpServletRequest request){
+		User user = getCurrentUser(request);
 		if(avatar!=null){
 			try{
 				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/user");
 				FileUtils.copyInputStreamToFile(avatar.getInputStream(), new File(realPath,getCurrentUser(request).getId() + ".png"));
-				
+				user.setAvatar("upload/user/"+user.getId()+".png");
+				userService.save(user);
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -135,10 +137,10 @@ public class UserAPIController {
 	 */
 	@RequestMapping(value="/forget/password", method=RequestMethod.POST)
 	public User ForgetPassword(
-			@RequestParam String email,
+			@RequestParam String account,
 			@RequestParam String newpassword){
 		
-		User user = userService.findByEmail(email);
+		User user = userService.findByAccount(account);
 		if(user==null){
 			return null;
 		}
@@ -162,5 +164,16 @@ public class UserAPIController {
 		}
 		user.setName(username);
 		return userService.save(user);
+	}
+	
+	/**
+	 * ’“µΩ”√ªß
+	 * @param account
+	 * @return
+	 */
+	@RequestMapping(value="/finduser",method=RequestMethod.POST)
+	public User FindUserByAccount(
+			@RequestParam String account){
+		return userService.findByAccount(account);
 	}
 }

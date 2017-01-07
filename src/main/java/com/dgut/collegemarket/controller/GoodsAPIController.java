@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dgut.collegemarket.entity.Advertisement;
 import com.dgut.collegemarket.entity.Goods;
 import com.dgut.collegemarket.entity.User;
+import com.dgut.collegemarket.service.IAdvertisementService;
 import com.dgut.collegemarket.service.IGoodsService;
 import com.dgut.collegemarket.service.IUserService;
 
@@ -31,6 +33,9 @@ public class GoodsAPIController {
 
 	@Autowired
 	IGoodsService goodsService;
+	
+	@Autowired
+	IAdvertisementService advertisementService;
 
 	/**
 	 * 找到当前用户
@@ -89,7 +94,11 @@ public class GoodsAPIController {
 	public Page<Goods> getGoodsPage(@PathVariable int page) {
 		return goodsService.getGoodsPage(page);
 	}
-
-
+	
+	
+	@RequestMapping(value = "/all/advertisement/{page}")
+	public Page<Advertisement> getAdvertisementPage(@PathVariable int page) {
+		return advertisementService.getAdvertisements(page);
+	}
 	
 }

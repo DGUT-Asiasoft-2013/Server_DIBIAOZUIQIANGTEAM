@@ -13,4 +13,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 @Repository
 public interface IPostRepository extends PagingAndSortingRepository<Post, Integer>{
 
+	@Query("from Post post where post.publishers.id =?1 ")
+	Page<Post> findPostPageByUserId(int  publishers_id,Pageable pageable);
+
 }

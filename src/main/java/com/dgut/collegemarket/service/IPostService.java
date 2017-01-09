@@ -12,4 +12,6 @@ public interface IPostService {
 	public Page<Post> getPosts(Integer page);
 	public Post save(Post post);
 	public Post findOne(Integer id);
+
+	public Page<Post> findPostPageByUserId(int publishers_id, int page);
 }

@@ -104,6 +104,8 @@ public class PostAPIController {
 		return postService.getPosts(page);
 	}
 	
+	
+	
 	/**
 	 *
 	 * @return
@@ -172,4 +174,23 @@ public class PostAPIController {
 		return records;
 
 	}
+
+	
+	@RequestMapping(value="/findByUserId/{page}",method=RequestMethod.POST)
+	public Page<Post> findPostPageByUserId(	@PathVariable int page,
+			@RequestParam int publishers_id
+		){
+		return postService.findPostPageByUserId(publishers_id,page);
+	}
+	
+	@RequestMapping(value="/findByUserId",method=RequestMethod.POST)
+	public Post findPostByUserId(@RequestParam int publishers_id
+		){
+		
+		Page<Post> postPage=findPostPageByUserId(0,publishers_id);
+		if(postPage==null|| postPage.getContent().size()==0)
+		return null;
+		return postPage.getContent().get(0);
+	}
+	
 }

@@ -165,6 +165,23 @@ public class UserAPIController {
 		user.setName(username);
 		return userService.save(user);
 	}
+	/**
+	 * 修改用户名称
+	 * @param username
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/update/email", method=RequestMethod.POST)
+	public User UpdateUserEmail(
+			@RequestParam String email,
+			HttpServletRequest request){
+		User user = getCurrentUser(request);
+		if(user==null){
+			return null;
+		}
+		user.setEmail(email);
+		return userService.save(user);
+	}
 	
 	/**
 	 * 找到用户

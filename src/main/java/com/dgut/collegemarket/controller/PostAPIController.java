@@ -81,6 +81,16 @@ public class PostAPIController {
 		post.setIssolve(false);
 		post.setBrowseVolume(0);
 		postService.save(post);
+		
+		User user = getCurrentUser(request);
+		user.setCoin(user.getCoin()-reward);
+		userService.save(user);
+		
+		Records records = new Records();
+		records.setUser(user);
+		records.setCoin(reward);
+		records.setCause("发帖("+title+")花费了");
+		recordsService.save(records);
 		if(albums!=null){
 			try{
 				String realPath = request.getSession().getServletContext().getRealPath("/WEB-INF/upload/post");

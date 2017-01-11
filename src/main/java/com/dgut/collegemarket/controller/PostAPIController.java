@@ -89,7 +89,7 @@ public class PostAPIController {
 		Records records = new Records();
 		records.setUser(user);
 		records.setCoin(reward);
-		records.setCause("发帖("+title+")花费了");
+		records.setCause("发帖("+title+")花费");
 		recordsService.save(records);
 		if(albums!=null){
 			try{
@@ -165,7 +165,7 @@ public class PostAPIController {
 		acceptuser.setCoin(post.getReward()+acceptuser.getCoin());
 		userService.save(acceptuser);
 		User user=	userService.save(acceptuser);
-		addRecords(user,"文章评论被采纳"+" 赚取了",post.getReward());
+		addRecords(user,"文章评论被采纳"+" 赚取",post.getReward());
 		
 //		User publishuser = post.getPublishers();
 //		publishuser.setCoin(publishuser.getCoin()-post.getReward());
